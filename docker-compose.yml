@@ -1,0 +1,21 @@
+version: '3'
+services:
+  flaskapi:
+    build: .
+    ports:
+      - "5000:5000"  # Expose Flask on port 5000
+    networks:
+      - mynetwork
+    restart: always  # Ensure the container restarts automatically if it crashes
+
+  mynodered:
+    image: nodered/node-red
+    ports:
+      - "1880:1880"  # Expose Node-RED on port 1880
+    networks:
+      - mynetwork
+    restart: always  # Ensure the container restarts automatically if it crashes
+
+networks:
+  mynetwork:
+    driver: bridge
